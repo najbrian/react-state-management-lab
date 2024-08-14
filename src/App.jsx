@@ -95,6 +95,14 @@ const App = () => {
     }
   }
 
+  const handleRemoveFighter = (fighter, idx) => {
+    const newTeamArray = team.filter((f, index)=> index !== idx)
+    setTeam(newTeamArray)
+    setMoney(money + fighter.price)
+    setStrength(totalStrength - fighter.strength)
+    setAgility(totalAgility - fighter.agility)
+  }
+
   return (
     <>
       <h1>Zombie Fighters</h1>
@@ -102,7 +110,7 @@ const App = () => {
       <h2>Team Strength: {totalStrength}</h2>
       <h2>Team Agility: {totalAgility}</h2>
       <h2>Team: </h2>
-      {team.length === 0 ? <p>Pick some team members!</p> : <TeamRoster team={ team } /> }
+      {team.length === 0 ? <p>Pick some team members!</p> : <TeamRoster team={ team } handleRemoveFighter={handleRemoveFighter} /> }
       <h2>Fighters</h2>
       <div className="fighter-container">
         {zombieFighters.map((fighter, idx) => (
